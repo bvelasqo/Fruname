@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "650066324823",
+    "firebase_url": "https://fir-1-b0192.firebaseio.com",
+    "project_id": "fir-1-b0192",
+    "storage_bucket": "fir-1-b0192.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:650066324823:android:eb361432c04b62027c2212",
+        "android_client_info": {
+          "package_name": "com.udem.fruname"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "650066324823-t7htl8pgn2cm82j2hgrmqdg3r28283ts.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC8347XaEcAlCawd3hQ09Gnk_Un3Q-HE3g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "650066324823-t7htl8pgn2cm82j2hgrmqdg3r28283ts.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

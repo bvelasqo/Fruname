@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Fruname</string>
+    <string name="email">Correo</string>
+    <string name="password">Contraseña</string>
+    <string name="registrar">Registrar</string>
+    <string name="crear_Cuenta">Crear cuenta</string>
+    <string name="ingresar">Ingresar</string>
+    <string name="nombre">Nombre</string>
+    <string name="id">Identificación</string>
+    <string name="Juguemos">¡Juguemos!</string>
+    <string name="score">Score</string>
+    <string name="XP">XP</string>
+    <string name="cerrar">Cerrar sesión</string>
+    <string name="nivel">nivel</string>
+</resources>
