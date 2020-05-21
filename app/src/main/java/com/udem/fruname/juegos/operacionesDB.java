@@ -12,9 +12,10 @@ public class operacionesDB {
     Context context;
     DBHelper helper;
 
-    public operacionesDB(Context context,String nameDB){
+
+    public operacionesDB(Context context){
         this.context=context;
-        helper=new DBHelper(context,nameDB,"",null,1);
+        helper=new DBHelper(context,"DBFruname.db","",null,1);
     }
     //Juego Adivina La Bandera
     public ArrayList<Pregunta> getPreguntaAB(){

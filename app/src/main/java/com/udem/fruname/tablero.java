@@ -81,12 +81,16 @@ public class tablero extends AppCompatActivity {
                         button.setText("Nivel "+(i+1));
                         button.setTextColor(getResources().getColor(R.color.colorAccent));
                         layoutBotones.addView(button);
+                        final int finalI = i;
                         button.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
                                 //Random random = new Random();
                                 //int juego =random.nextInt(6)+1;
-                                startActivity(new Intent(tablero.this, adivinarBandera.class));
+                                Intent intent=new Intent(tablero.this, adivinarBandera.class);
+                                intent.putExtra("boton", finalI +1);
+                                startActivity(intent);
+                                finish();
                             }
                         });
                     }

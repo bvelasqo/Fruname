@@ -32,7 +32,7 @@ public class adivinarBandera extends AppCompatActivity {
     TextView score;
     String correcta,uid;
     com.udem.fruname.juegos.operacionesDB operacionesDB;
-    int contadorContestadas=0,puntos=0,scoreactual,xpActual,nivelActual;;
+    int contadorContestadas=0,puntos=0,scoreactual,xpActual,nivelActual,numBoton;
     FirebaseAuth mAuth;
     DatabaseReference mDataBase;
     private static final int XPAB=180;
@@ -44,11 +44,12 @@ public class adivinarBandera extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_adivinar_bandera);
         Conectar();
+        numBoton=getIntent().getIntExtra("boton",0);
         opciones=new ArrayList<>();
         mAuth=FirebaseAuth.getInstance();
         mDataBase= FirebaseDatabase.getInstance().getReference();
         uid=mAuth.getCurrentUser().getUid();
-        operacionesDB=new operacionesDB(getApplicationContext(),"dbadivinarBandera.db");
+        operacionesDB=new operacionesDB(getApplicationContext());
         preguntas=operacionesDB.getPreguntaAB();
         traerDatos();
         actualizarPregunta();
@@ -83,7 +84,7 @@ public class adivinarBandera extends AppCompatActivity {
     private void actualizarPregunta(){
         if(contadorContestadas<5){
             Random random = new Random();
-            int pregunta= random.nextInt(20-contadorContestadas)+1;
+            int pregunta= random.nextInt(20-contadorContestadas);
             preguntaActual=preguntas.get(pregunta);
             correcta=preguntas.get(pregunta).getCorrecta();
             ActualizarBandera();
@@ -115,11 +116,13 @@ public class adivinarBandera extends AppCompatActivity {
 
     private void Finalizar() {
         Map<String,Object> datos = new HashMap();
-        datos.put("nivel",nivelActual+1);
+        if(numBoton==nivelActual)
+            datos.put("nivel",nivelActual+1);
         datos.put("xp",xpActual+XPAB);
         datos.put("score",scoreactual+puntos);
         mDataBase.child("Jugadores").child(uid).updateChildren(datos);
         startActivity(new Intent(adivinarBandera.this, tablero.class));
+        finish();
     }
 
     private void Conectar() {
@@ -149,7 +152,7 @@ public class adivinarBandera extends AppCompatActivity {
                 bandera.setImageResource(R.drawable.ghana);
                 break;
             case "Honduras":
-                bandera.setImageResource(R.drawable.brasil);
+                bandera.setImageResource(R.drawable.honduras);
                 break;
             case "Serbia":
                 bandera.setImageResource(R.drawable.serbia);
