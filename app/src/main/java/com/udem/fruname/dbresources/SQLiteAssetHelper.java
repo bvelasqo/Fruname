@@ -1,4 +1,4 @@
-package com.udem.fruname;
+package com.udem.fruname.dbresources;
 /*
  * Copyright (C) 2011 readyState Software Ltd, 2007 The Android Open Source Project
  *
@@ -20,6 +20,9 @@ import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+
+import com.udem.fruname.dbresources.Utils;
+import com.udem.fruname.dbresources.VersionComparator;
 
 import java.io.File;
 import java.io.FileOutputStream;

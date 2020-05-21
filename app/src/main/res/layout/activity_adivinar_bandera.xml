@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fondoadivinalabandera"
+    tools:context=".juegos.adivinarBandera">
+
+    <ImageView
+        android:id="@+id/imgBanderaAB"
+        android:layout_width="280dp"
+        android:layout_height="200dp"
+        android:contentDescription="@string/app_name"
+        android:src="@color/colorAccent"
+        app:layout_constraintBottom_toTopOf="@+id/btnOpcion4AB"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.752" />
+
+    <Button
+        android:id="@+id/btnOpcion1AB"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorAccent"
+        android:background="@drawable/botonesalternativo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.797" />
+
+    <Button
+        android:id="@+id/btnOpcion2AB"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:textColor="@color/colorAccent"
+        android:background="@drawable/botonesalternativo"
+        app:layout_constraintBottom_toTopOf="@+id/btnOpcion1AB"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.992" />
+
+    <Button
+        android:id="@+id/btnOpcion3AB"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnOpcion2AB"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="@color/colorAccent"
+        android:background="@drawable/botonesalternativo"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/btnOpcion4AB"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:textColor="@color/colorAccent"
+        android:background="@drawable/botonesalternativo"
+        app:layout_constraintBottom_toTopOf="@+id/btnOpcion3AB"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/titleAB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/Adivina_La_Bandera"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/imgBanderaAB"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnOpcion1AB"
+        app:layout_constraintVertical_bias="0.315">
+
+        <TextView
+            android:id="@+id/tvScoreAB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:text="@string/score"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvSAB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:text="@string/score"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

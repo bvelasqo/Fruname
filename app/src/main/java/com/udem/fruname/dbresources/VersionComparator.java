@@ -1,6 +1,8 @@
-package com.udem.fruname;
+package com.udem.fruname.dbresources;
 
 import android.util.Log;
+
+import com.udem.fruname.dbresources.SQLiteAssetHelper;
 
 import java.util.Comparator;
 import java.util.regex.Matcher;

@@ -75,7 +75,6 @@ public class registrar extends AppCompatActivity {
                         public void onComplete(@NonNull Task<Void> task2) {
                             if(task2.isSuccessful()){
                                 Intent intent = new Intent(registrar.this,tablero.class);
-                                intent.putExtra("uid",uid);
                                 startActivity(intent);
                                 finish();
                             }else {

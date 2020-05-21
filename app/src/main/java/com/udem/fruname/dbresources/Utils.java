@@ -1,5 +1,7 @@
-package com.udem.fruname;
+package com.udem.fruname.dbresources;
 import android.util.Log;
+
+import com.udem.fruname.dbresources.SQLiteAssetHelper;
 
 import java.io.IOException;
 import java.io.InputStream;

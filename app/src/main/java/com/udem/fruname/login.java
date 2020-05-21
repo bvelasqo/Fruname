@@ -49,7 +49,6 @@ public class login extends AppCompatActivity {
                 if(task.isSuccessful()){
                     String uid =mAuth.getCurrentUser().getUid();
                     Intent intent= new Intent(login.this,tablero.class);
-                    intent.putExtra("uid",uid);
                     startActivity(intent);
                     finish();
                 }else{
@@ -65,7 +64,6 @@ public class login extends AppCompatActivity {
         if(mAuth.getCurrentUser()!=null){
             String uid =mAuth.getCurrentUser().getUid();
             Intent intent= new Intent(login.this,tablero.class);
-            intent.putExtra("uid",uid);
             startActivity(intent);
             finish();
         }

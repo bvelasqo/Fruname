@@ -19,6 +19,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.udem.fruname.juegos.adivinarBandera;
 
 import java.util.Random;
 
@@ -38,9 +39,8 @@ public class tablero extends AppCompatActivity {
         Conectar();
         mDataBase= FirebaseDatabase.getInstance().getReference();
         mAuth=FirebaseAuth.getInstance();
-        uid=getIntent().getStringExtra("uid");
+        uid=mAuth.getCurrentUser().getUid();
         actualizarDatos();
-        addBotones();
     }
 
     public void cerrarSesion(View view){
@@ -59,26 +59,10 @@ public class tablero extends AppCompatActivity {
         layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
     }
 
-    private void addBotones(){
-        for (int i=0;i<=nivel;i++){
-            Button button = new Button(getApplicationContext());
-            button.setLayoutParams(layoutParams);
-            button.setBackground(getResources().getDrawable(R.drawable.botonesalternativo));
-            button.setText("Nivel "+(i+1));
-            button.setTextColor(getResources().getColor(R.color.colorAccent));
-            layoutBotones.addView(button);
-            button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Random random = new Random();
-                    int juego =random.nextInt(6)+1;
-                }
-            });
-        }
-    }
 
     private void actualizarDatos(){
         mDataBase.child("Jugadores").child(uid).addValueEventListener(new ValueEventListener() {
+
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()){
@@ -90,6 +74,22 @@ public class tablero extends AppCompatActivity {
                      tvNivel.setText("Nivel "+nivel);
                      tvNombre.setText(nombre);
                      tvScore.setText(score+"");
+                    for (int i=0;i<nivel;i++){
+                        Button button = new Button(getApplicationContext());
+                        button.setLayoutParams(layoutParams);
+                        button.setBackground(getResources().getDrawable(R.drawable.botonesalternativo));
+                        button.setText("Nivel "+(i+1));
+                        button.setTextColor(getResources().getColor(R.color.colorAccent));
+                        layoutBotones.addView(button);
+                        button.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                //Random random = new Random();
+                                //int juego =random.nextInt(6)+1;
+                                startActivity(new Intent(tablero.this, adivinarBandera.class));
+                            }
+                        });
+                    }
                 }
                 else {
                     Toast.makeText(getApplicationContext(),"no existe",Toast.LENGTH_LONG).show();
@@ -101,5 +101,6 @@ public class tablero extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),databaseError.getDetails(),Toast.LENGTH_LONG).show();
             }
         });
+
     }
 }
