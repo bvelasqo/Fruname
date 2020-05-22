@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -44,6 +45,7 @@ public class adivinarBandera extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_adivinar_bandera);
         Conectar();
+        score.setText("0");
         numBoton=getIntent().getIntExtra("boton",0);
         opciones=new ArrayList<>();
         mAuth=FirebaseAuth.getInstance();
@@ -68,14 +70,29 @@ public class adivinarBandera extends AppCompatActivity {
                 public void onClick(View v) {
                     if(correcta.equals(b.getText().toString())){
                         Toast.makeText(getApplicationContext(),"¡Acertaste!",Toast.LENGTH_LONG).show();
+                        b.setBackground(getResources().getDrawable(R.drawable.botonacertado));
                         puntos+=200;
                     }else{
                         Toast.makeText(getApplicationContext(),"Respuesta equivocada era: "+correcta,Toast.LENGTH_LONG).show();
+                        b.setBackground(getResources().getDrawable(R.drawable.botonincorrecto));
                     }
-                    contadorContestadas++;
-                    preguntas.remove(preguntaActual);
-                    actualizarPregunta();
-                    score.setText(puntos+"");
+                    enabledButton(false);
+                    new CountDownTimer(2000,1000){
+                        @Override
+                        public void onTick(long millisUntilFinished) {
+                        }
+
+                        @Override
+                        public void onFinish() {
+                            enabledButton(true);
+                            b.setBackground(getResources().getDrawable(R.drawable.botonesalternativo));
+                            contadorContestadas++;
+                            preguntas.remove(preguntaActual);
+                            actualizarPregunta();
+                            score.setText(puntos+"");
+                        }
+                    }.start();
+
                 }
             });
         }
@@ -96,6 +113,13 @@ public class adivinarBandera extends AppCompatActivity {
         else{
             Finalizar();
         }
+    }
+
+    private void enabledButton(boolean a){
+        op1.setEnabled(a);
+        op2.setEnabled(a);
+        op3.setEnabled(a);
+        op4.setEnabled(a);
     }
 
     private void traerDatos(){

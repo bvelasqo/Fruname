@@ -89,7 +89,7 @@
         app:layout_constraintVertical_bias="0.315">
 
         <TextView
-            android:id="@+id/tvScoreAB"
+            android:id="@+id/tvSAB"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -100,7 +100,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/tvSAB"
+            android:id="@+id/tvScoreAB"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
