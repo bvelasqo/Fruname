@@ -7,6 +7,7 @@ public class Pregunta {
     String opcion3;
     String opcion4;
     String correcta;
+    private String categoria;
 
     public String getPregunta() {
         return pregunta;
@@ -33,14 +34,22 @@ public class Pregunta {
     }
 
 
-    public Pregunta(String pregunta, String opcion1, String opcion2, String opcion3, String opcion4, String correcta) {
+    public Pregunta(String pregunta, String opcion1, String opcion2, String opcion3, String opcion4, String correcta, String categoria) {
         this.pregunta = pregunta;
         this.opcion1 = opcion1;
         this.opcion2 = opcion2;
         this.opcion3 = opcion3;
         this.opcion4 = opcion4;
         this.correcta = correcta;
+        this.setCategoria(categoria);
     }
 
 
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
 }
