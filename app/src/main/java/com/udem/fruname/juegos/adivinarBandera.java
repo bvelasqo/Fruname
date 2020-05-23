@@ -92,7 +92,6 @@ public class adivinarBandera extends AppCompatActivity {
                             score.setText(puntos+"");
                         }
                     }.start();
-
                 }
             });
         }

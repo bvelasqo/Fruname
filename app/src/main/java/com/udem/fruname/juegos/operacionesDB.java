@@ -33,4 +33,21 @@ public class operacionesDB {
         db.close();
         return list;
     }
+
+    //Juego Descubre la imagen
+    public ArrayList<Pregunta> getPreguntaDI(){
+        SQLiteDatabase db = helper.getWritableDatabase();
+        String SQL = "Select * from JuegosPreguntas";
+        Cursor c = db.rawQuery(SQL, null);
+        ArrayList<Pregunta> lista = new ArrayList<>();
+        if(c.moveToFirst()){
+            do{
+                String pregunta = c.getString(1), opcion1= c.getString(2), opcion2 = c.getString(3),
+                        opcion3=c.getString(4), correcta = c.getString(5);
+                lista.add(new Pregunta(pregunta,opcion1,opcion2,opcion3,"",correcta));
+            } while(c.moveToNext());
+        }
+        db.close();
+        return lista;
+    }
 }
