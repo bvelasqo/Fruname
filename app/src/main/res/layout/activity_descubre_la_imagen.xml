@@ -50,6 +50,7 @@
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:id="@+id/btnPregunta1"
+            android:layout_marginLeft="65sp"
             android:layout_below="@+id/lbPuntaje"
             android:layout_marginTop="20dp"
             android:textSize="20dp"></Button>
@@ -90,6 +91,7 @@
             android:layout_height="70dp"
             android:id="@+id/btnPregunta5"
             android:layout_below="@+id/btnPregunta1"
+            android:layout_marginLeft="65sp"
             android:layout_marginTop="8dp"
             android:textSize="20dp"
             android:textStyle="bold"></Button>
@@ -131,6 +133,7 @@
             android:id="@+id/btnPregunta9"
             android:layout_below="@+id/btnPregunta5"
             android:layout_marginTop="8dp"
+            android:layout_marginLeft="65sp"
             android:textSize="20dp"
             android:textStyle="bold"></Button>
 
