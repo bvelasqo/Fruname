@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".juegos.adivinarBandera"></activity>
+        <activity android:name=".juegos.descubreLaImagen"></activity>
+        <activity android:name=".juegos.adivinarBandera" />
         <activity android:name=".Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,7 +20,7 @@
         </activity>
         <activity android:name=".tablero" />
         <activity android:name=".registrar" />
-        <activity android:name=".login"></activity>
+        <activity android:name=".login" />
     </application>
 
 </manifest>
