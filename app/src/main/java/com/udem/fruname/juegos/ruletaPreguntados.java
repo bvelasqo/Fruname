@@ -2,6 +2,7 @@ package com.udem.fruname.juegos;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
@@ -47,8 +48,9 @@ private static final float FACTOR = 45f;
                     @Override
                     public void onAnimationEnd(Animation animation) {
                         tvAngulo.setText(NumeroActual(360 - (degree % 360)));
+                        Intent i = new Intent(getApplicationContext(),preguntados.class);
+                        i.putExtra("categoria",NumeroActual(360 - (degree % 360)));
                     }
-
                     @Override
                     public void onAnimationRepeat(Animation animation) {
 
