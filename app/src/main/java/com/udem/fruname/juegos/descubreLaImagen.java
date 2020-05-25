@@ -3,6 +3,7 @@ package com.udem.fruname.juegos;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
@@ -30,6 +31,8 @@ public class descubreLaImagen extends AppCompatActivity {
     com.udem.fruname.juegos.operacionesDB operacionesDB;
     ArrayList<Pregunta> preguntas;
     ArrayList<Button> opciones;
+
+    Drawable castillo1 = getResources().getDrawable(R.drawable.catillo1);
 
 
     @Override
@@ -69,17 +72,6 @@ public class descubreLaImagen extends AppCompatActivity {
 
     }
 
-    private void mostrarPreguntas(){
-        aleatorio = random.nextInt(40-contestadas);
-        preguntaActual = preguntas.get(aleatorio);
-        correcta = preguntas.get(aleatorio).getCorrecta();
-        lbPregunta.setText(preguntas.get(aleatorio).getPregunta());
-        btnOpcion1.setText(preguntas.get(aleatorio).getOpcion1());
-        btnOpcion2.setText(preguntas.get(aleatorio).getOpcion2());
-        btnOpcion3.setText(preguntas.get(aleatorio).getOpcion3());
-
-    }
-
     private void esCorrecta(){
         opciones.add(btnOpcion1);
         opciones.add(btnOpcion2);
@@ -91,6 +83,7 @@ public class descubreLaImagen extends AppCompatActivity {
                     countDownTimer.cancel();
                     if(correcta.equals(boton.getText().toString())){
                         Toast.makeText(getApplicationContext(),"CORRECTO",Toast.LENGTH_LONG).show();
+                        boton.setBackground(castillo1);
                     } else {
                         Toast.makeText(getApplicationContext(),"INCORRECTO",Toast.LENGTH_LONG).show();
                     }
@@ -98,6 +91,21 @@ public class descubreLaImagen extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    private void mostrarPreguntas(){
+        if(contestadas<12){
+            aleatorio = random.nextInt(40-contestadas);
+            preguntaActual = preguntas.get(aleatorio);
+            correcta = preguntas.get(aleatorio).getCorrecta();
+            lbPregunta.setText(preguntas.get(aleatorio).getPregunta());
+            btnOpcion1.setText(preguntas.get(aleatorio).getOpcion1());
+            btnOpcion2.setText(preguntas.get(aleatorio).getOpcion2());
+            btnOpcion3.setText(preguntas.get(aleatorio).getOpcion3());
+        } else {
+            //Terminar juego
+        }
+
     }
 
     private void conectar() {
