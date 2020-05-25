@@ -77,7 +77,7 @@ public class descubreLaImagen extends AppCompatActivity {
                         public void onFinish() {
                             botonActual.setBackgroundColor(Color.RED);
                             botonActual.setEnabled(false);
-                            lbTiempo.setText("Done.");
+                            lbTiempo.setText("Se termino el tiempo");
                         }
                     }.start();
                     contestadas++;
@@ -98,34 +98,34 @@ public class descubreLaImagen extends AppCompatActivity {
                 public void onClick(View v) {
                     countDownTimer.cancel();
                     if(correcta.equals(boton.getText().toString())){
-                        Toast.makeText(getApplicationContext(),"RESPUESTA CORRECTA",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(),"RESPUESTA CORRECTA",Toast.LENGTH_SHORT).show();
                         if(botonActual == btnPregunta1){
-                            boton.setBackground(boton.getContext().getResources().getDrawable(R.drawable.catillo1));
+                            botonActual.setBackground(botonActual.getContext().getResources().getDrawable(R.drawable.catillo1));
                         } else if(botonActual == btnPregunta2){
-                            boton.setBackground(boton.getContext().getResources().getDrawable(R.drawable.castillo2));
+                            botonActual.setBackground(botonActual.getContext().getResources().getDrawable(R.drawable.castillo2));
                         } else if(botonActual == btnPregunta3){
-                            boton.setBackground(boton.getContext().getResources().getDrawable(R.drawable.castillo3));
+                            botonActual.setBackground(botonActual.getContext().getResources().getDrawable(R.drawable.castillo3));
                         } else if(botonActual == btnPregunta4){
-                            boton.setBackground(boton.getContext().getResources().getDrawable(R.drawable.castillo4));
+                            botonActual.setBackground(botonActual.getContext().getResources().getDrawable(R.drawable.castillo4));
                         } else if(botonActual == btnPregunta5){
-                            boton.setBackground(boton.getContext().getResources().getDrawable(R.drawable.castillo5));
+                            botonActual.setBackground(botonActual.getContext().getResources().getDrawable(R.drawable.castillo5));
                         } else if(botonActual == btnPregunta6){
-                            boton.setBackground(boton.getContext().getResources().getDrawable(R.drawable.castillo6));
+                            botonActual.setBackground(botonActual.getContext().getResources().getDrawable(R.drawable.castillo6));
                         } else if(botonActual == btnPregunta7){
-                            boton.setBackground(boton.getContext().getResources().getDrawable(R.drawable.castillo7));
+                            botonActual.setBackground(botonActual.getContext().getResources().getDrawable(R.drawable.castillo7));
                         } else if(botonActual == btnPregunta8){
-                            boton.setBackground(boton.getContext().getResources().getDrawable(R.drawable.castillo8));
+                            botonActual.setBackground(botonActual.getContext().getResources().getDrawable(R.drawable.castillo8));
                         } else if(botonActual == btnPregunta9){
-                            boton.setBackground(boton.getContext().getResources().getDrawable(R.drawable.castillo9));
+                            botonActual.setBackground(botonActual.getContext().getResources().getDrawable(R.drawable.castillo9));
                         } else if(botonActual == btnPregunta10){
-                            boton.setBackground(boton.getContext().getResources().getDrawable(R.drawable.castillo10));
+                            botonActual.setBackground(botonActual.getContext().getResources().getDrawable(R.drawable.castillo10));
                         } else if(botonActual == btnPregunta11){
-                            boton.setBackground(boton.getContext().getResources().getDrawable(R.drawable.castillo11));
+                            botonActual.setBackground(botonActual.getContext().getResources().getDrawable(R.drawable.castillo11));
                         } else if(botonActual == btnPregunta12){
-                            boton.setBackground(boton.getContext().getResources().getDrawable(R.drawable.castillo12));
+                            botonActual.setBackground(botonActual.getContext().getResources().getDrawable(R.drawable.castillo12));
                         }
                     } else {
-                        Toast.makeText(getApplicationContext(),"INCORRECTO",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(),"INCORRECTO",Toast.LENGTH_SHORT).show();
                         botonActual.setBackgroundColor(Color.RED);
                     }
                     botonActual.setEnabled(false);
