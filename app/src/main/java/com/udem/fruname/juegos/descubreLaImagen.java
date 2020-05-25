@@ -1,8 +1,12 @@
 package com.udem.fruname.juegos;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.ColorFilter;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -31,8 +35,7 @@ public class descubreLaImagen extends AppCompatActivity {
     com.udem.fruname.juegos.operacionesDB operacionesDB;
     ArrayList<Pregunta> preguntas;
     ArrayList<Button> opciones;
-
-    Drawable castillo1 = getResources().getDrawable(R.drawable.catillo1);
+    ArrayList<Button> botones;
 
 
     @Override
@@ -43,33 +46,46 @@ public class descubreLaImagen extends AppCompatActivity {
         operacionesDB=new operacionesDB(getApplicationContext());
         preguntas = operacionesDB.getPreguntaDI();
         opciones = new ArrayList<>();
+        botones = new ArrayList<>();
 
+        botones.add(btnPregunta1);
+        botones.add(btnPregunta2);
+        botones.add(btnPregunta3);
+        botones.add(btnPregunta4);
+        botones.add(btnPregunta5);
+        botones.add(btnPregunta6);
+        botones.add(btnPregunta7);
+        botones.add(btnPregunta8);
+        botones.add(btnPregunta9);
+        botones.add(btnPregunta10);
+        botones.add(btnPregunta11);
+        botones.add(btnPregunta12);
 
-        btnPregunta1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mostrarPreguntas();
-                botonActual =btnPregunta1;
-                countDownTimer = new CountDownTimer(10000, 1000) {
-                    @Override
-                    public void onTick(long millisUntilFinished) {
-                        lbTiempo.setText(String.format(Locale.getDefault(), "%d sec", millisUntilFinished / 1000L));
-                    }
+        for(final Button btnPregunta : botones){
+            btnPregunta.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mostrarPreguntas();
+                    botonActual =btnPregunta;
+                    countDownTimer = new CountDownTimer(10000, 1000) {
+                        @Override
+                        public void onTick(long millisUntilFinished) {
+                            lbTiempo.setText(String.format(Locale.getDefault(), "%d sec", millisUntilFinished / 1000L));
+                        }
 
-                    @Override
-                    public void onFinish() {
-                        botonActual.setBackgroundColor(Color.RED);
-                        botonActual.setEnabled(false);
-                        lbTiempo.setText("Done.");
-                    }
-                }.start();
-                contestadas++;
-                preguntas.remove(preguntaActual);
-                esCorrecta();
-            }
-        });
-
-
+                        @Override
+                        public void onFinish() {
+                            botonActual.setBackgroundColor(Color.RED);
+                            botonActual.setEnabled(false);
+                            lbTiempo.setText("Done.");
+                        }
+                    }.start();
+                    contestadas++;
+                    esCorrecta();
+                    preguntas.remove(preguntaActual);
+                }
+            });
+        }
     }
 
     private void esCorrecta(){
@@ -82,10 +98,35 @@ public class descubreLaImagen extends AppCompatActivity {
                 public void onClick(View v) {
                     countDownTimer.cancel();
                     if(correcta.equals(boton.getText().toString())){
-                        Toast.makeText(getApplicationContext(),"CORRECTO",Toast.LENGTH_LONG).show();
-                        boton.setBackground(castillo1);
+                        Toast.makeText(getApplicationContext(),"RESPUESTA CORRECTA",Toast.LENGTH_LONG).show();
+                        if(botonActual == btnPregunta1){
+                            boton.setBackground(boton.getContext().getResources().getDrawable(R.drawable.catillo1));
+                        } else if(botonActual == btnPregunta2){
+                            boton.setBackground(boton.getContext().getResources().getDrawable(R.drawable.castillo2));
+                        } else if(botonActual == btnPregunta3){
+                            boton.setBackground(boton.getContext().getResources().getDrawable(R.drawable.castillo3));
+                        } else if(botonActual == btnPregunta4){
+                            boton.setBackground(boton.getContext().getResources().getDrawable(R.drawable.castillo4));
+                        } else if(botonActual == btnPregunta5){
+                            boton.setBackground(boton.getContext().getResources().getDrawable(R.drawable.castillo5));
+                        } else if(botonActual == btnPregunta6){
+                            boton.setBackground(boton.getContext().getResources().getDrawable(R.drawable.castillo6));
+                        } else if(botonActual == btnPregunta7){
+                            boton.setBackground(boton.getContext().getResources().getDrawable(R.drawable.castillo7));
+                        } else if(botonActual == btnPregunta8){
+                            boton.setBackground(boton.getContext().getResources().getDrawable(R.drawable.castillo8));
+                        } else if(botonActual == btnPregunta9){
+                            boton.setBackground(boton.getContext().getResources().getDrawable(R.drawable.castillo9));
+                        } else if(botonActual == btnPregunta10){
+                            boton.setBackground(boton.getContext().getResources().getDrawable(R.drawable.castillo10));
+                        } else if(botonActual == btnPregunta11){
+                            boton.setBackground(boton.getContext().getResources().getDrawable(R.drawable.castillo11));
+                        } else if(botonActual == btnPregunta12){
+                            boton.setBackground(boton.getContext().getResources().getDrawable(R.drawable.castillo12));
+                        }
                     } else {
                         Toast.makeText(getApplicationContext(),"INCORRECTO",Toast.LENGTH_LONG).show();
+                        botonActual.setBackgroundColor(Color.RED);
                     }
                     botonActual.setEnabled(false);
                 }
@@ -103,6 +144,7 @@ public class descubreLaImagen extends AppCompatActivity {
             btnOpcion2.setText(preguntas.get(aleatorio).getOpcion2());
             btnOpcion3.setText(preguntas.get(aleatorio).getOpcion3());
         } else {
+            Toast.makeText(getApplicationContext(),"FIN DEL JUEGO",Toast.LENGTH_LONG).show();
             //Terminar juego
         }
 

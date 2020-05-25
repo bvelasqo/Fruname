@@ -20,6 +20,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.udem.fruname.juegos.adivinarBandera;
+import com.udem.fruname.juegos.descubreLaImagen;
 
 import java.util.Random;
 
@@ -87,7 +88,7 @@ public class tablero extends AppCompatActivity {
                             public void onClick(View v) {
                                 //Random random = new Random();
                                 //int juego =random.nextInt(6)+1;
-                                Intent intent=new Intent(tablero.this, adivinarBandera.class);
+                                Intent intent=new Intent(tablero.this, descubreLaImagen.class);
                                 intent.putExtra("boton", finalI +1);
                                 startActivity(intent);
                                 finish();
