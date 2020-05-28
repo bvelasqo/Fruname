@@ -21,6 +21,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.udem.fruname.juegos.adivinarBandera;
 import com.udem.fruname.juegos.descubreLaImagen;
+import com.udem.fruname.juegos.ruletaPreguntados;
 
 import java.util.Random;
 
@@ -86,12 +87,34 @@ public class tablero extends AppCompatActivity {
                         button.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                //Random random = new Random();
-                                //int juego =random.nextInt(6)+1;
+                                Random random = new Random();
+                                int juego =random.nextInt(3);
                                 Intent intent=new Intent(tablero.this, descubreLaImagen.class);
                                 intent.putExtra("boton", finalI +1);
                                 startActivity(intent);
                                 finish();
+                                /*switch (juego){
+                                    case 0:
+                                        Intent intent=new Intent(tablero.this, descubreLaImagen.class);
+                                        intent.putExtra("boton", finalI +1);
+                                        startActivity(intent);
+                                        finish();
+                                        break;
+                                    case 1:
+                                        Intent intent2=new Intent(tablero.this, ruletaPreguntados.class);
+                                        intent2.putExtra("boton", finalI +1);
+                                        startActivity(intent2);
+                                        finish();
+                                        break;
+                                    case 2:
+                                        Intent intent3=new Intent(tablero.this, adivinarBandera.class);
+                                        intent3.putExtra("boton", finalI +1);
+                                        startActivity(intent3);
+                                        finish();
+                                        break;
+                                }*/
+
+
                             }
                         });
                     }

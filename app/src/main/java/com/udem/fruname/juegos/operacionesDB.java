@@ -15,7 +15,7 @@ public class operacionesDB {
 
     public operacionesDB(Context context){
         this.context=context;
-        helper=new DBHelper(context,"DBFruname.db","",null,1);
+        helper=new DBHelper(context,"","",null,1);
     }
     //Juego Adivina La Bandera
     public ArrayList<Pregunta> getPreguntaAB(){
