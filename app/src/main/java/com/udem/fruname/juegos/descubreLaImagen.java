@@ -38,8 +38,8 @@ public class descubreLaImagen extends AppCompatActivity {
             btnPregunta5, btnPregunta6, btnPregunta7, btnPregunta8, btnPregunta9, btnPregunta10, btnPregunta11,
             btnPregunta12, botonActual;
     Random random = new Random();
-    int aleatorio, contestadas=0, puntos=0, scoreActual, xpActual, nivelActual, numBoton;
-    String correcta, uid, nombreJugador;
+    int aleatorio, contestadas=0, puntos=0, scoreActual, xpActual, nivelActual, numBoton, cantidadCorrectas=0;
+    String correcta, uid, nombre;
     Pregunta preguntaActual;
     CountDownTimer countDownTimer;
     com.udem.fruname.juegos.operacionesDB operacionesDB;
@@ -58,15 +58,14 @@ public class descubreLaImagen extends AppCompatActivity {
         conectar();
         numBoton=getIntent().getIntExtra("boton",0);
         lbPuntaje.setText("0");
+        mDataBase= FirebaseDatabase.getInstance().getReference();
+        uid=mAuth.getCurrentUser().getUid();
         operacionesDB=new operacionesDB(getApplicationContext());
         preguntas = operacionesDB.getPreguntaDI();
         opciones = new ArrayList<>();
         botones = new ArrayList<>();
         mAuth=FirebaseAuth.getInstance();
-        mDataBase= FirebaseDatabase.getInstance().getReference();
-        uid=mAuth.getCurrentUser().getUid();
         traerDatos();
-        lbNombreJugador.setText(nombreJugador);
 
         botones.add(btnPregunta1);
         botones.add(btnPregunta2);
@@ -87,6 +86,9 @@ public class descubreLaImagen extends AppCompatActivity {
                 public void onClick(View v) {
                     mostrarPreguntas();
                     botonActual =btnPregunta;
+                    btnOpcion1.setEnabled(true);
+                    btnOpcion2.setEnabled(true);
+                    btnOpcion3.setEnabled(true);
                     countDownTimer = new CountDownTimer(10000, 1000) {
                         @Override
                         public void onTick(long millisUntilFinished) {
@@ -120,6 +122,7 @@ public class descubreLaImagen extends AppCompatActivity {
                     if(correcta.equals(boton.getText().toString())){
                         Toast.makeText(getApplicationContext(),"RESPUESTA CORRECTA",Toast.LENGTH_SHORT).show();
                         puntos+=100;
+                        cantidadCorrectas++;
                         if(botonActual == btnPregunta1){
                             botonActual.setBackground(botonActual.getContext().getResources().getDrawable(R.drawable.catillo1));
                         } else if(botonActual == btnPregunta2){
@@ -151,6 +154,9 @@ public class descubreLaImagen extends AppCompatActivity {
                     }
                     lbPuntaje.setText(puntos+"");
                     botonActual.setEnabled(false);
+                    btnOpcion1.setEnabled(false);
+                    btnOpcion2.setEnabled(false);
+                    btnOpcion3.setEnabled(false);
                 }
             });
         }
@@ -167,9 +173,16 @@ public class descubreLaImagen extends AppCompatActivity {
             btnOpcion3.setText(preguntas.get(aleatorio).getOpcion3());
         } else {
             Toast.makeText(getApplicationContext(),"FIN DEL JUEGO",Toast.LENGTH_LONG).show();
-            TerminarJuego();
+            if(cantidadCorrectas == 12){
+                Toast.makeText(getApplicationContext(),"FELICITACIONES, HAS GANADO EL JUEGO",Toast.LENGTH_LONG).show();
+                TerminarJuego();
+            } else {
+                Toast.makeText(getApplicationContext(),"VUELVE A INTENTARLO HASTA DESCUBRIR TODA LA IMAGEN",Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(getApplicationContext(),tablero.class);
+                startActivity(intent);
+                finish();
+            }
         }
-
     }
 
     private void traerDatos(){
@@ -179,7 +192,7 @@ public class descubreLaImagen extends AppCompatActivity {
                 scoreActual= Integer.parseInt(dataSnapshot.child("score").getValue().toString());
                 xpActual=Integer.parseInt(dataSnapshot.child("xp").getValue().toString());
                 nivelActual=Integer.parseInt(dataSnapshot.child("nivel").getValue().toString());
-                nombreJugador = dataSnapshot.child("nombre").getValue().toString();
+                nombre = dataSnapshot.child("nombre").getValue().toString();
             }
 
             @Override
@@ -187,6 +200,7 @@ public class descubreLaImagen extends AppCompatActivity {
 
             }
         });
+        lbNombreJugador.setText(nombre);
     }
 
     private void TerminarJuego() {
@@ -196,7 +210,8 @@ public class descubreLaImagen extends AppCompatActivity {
         datos.put("xp",xpActual+XPDI);
         datos.put("score",scoreActual+puntos);
         mDataBase.child("Jugadores").child(uid).updateChildren(datos);
-        startActivity(new Intent(descubreLaImagen.this, tablero.class));
+        Intent intent = new Intent(getApplicationContext(),tablero.class);
+        startActivity(intent);
         finish();
     }
 
