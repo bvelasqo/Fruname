@@ -38,6 +38,8 @@ public class descubreLaImagen extends AppCompatActivity {
             btnPregunta5, btnPregunta6, btnPregunta7, btnPregunta8, btnPregunta9, btnPregunta10, btnPregunta11,
             btnPregunta12, botonActual;
     Random random = new Random();
+    FirebaseAuth mAuth;
+    DatabaseReference mDataBase;
     int aleatorio, contestadas=0, puntos=0, scoreActual, xpActual, nivelActual, numBoton, cantidadCorrectas=0;
     String correcta, uid, nombre;
     Pregunta preguntaActual;
@@ -46,8 +48,6 @@ public class descubreLaImagen extends AppCompatActivity {
     ArrayList<Pregunta> preguntas;
     ArrayList<Button> opciones;
     ArrayList<Button> botones;
-    FirebaseAuth mAuth;
-    DatabaseReference mDataBase;
     private static final int XPDI=200;
 
 
@@ -58,13 +58,13 @@ public class descubreLaImagen extends AppCompatActivity {
         conectar();
         numBoton=getIntent().getIntExtra("boton",0);
         lbPuntaje.setText("0");
+        mAuth=FirebaseAuth.getInstance();
         mDataBase= FirebaseDatabase.getInstance().getReference();
         uid=mAuth.getCurrentUser().getUid();
         operacionesDB=new operacionesDB(getApplicationContext());
         preguntas = operacionesDB.getPreguntaDI();
         opciones = new ArrayList<>();
         botones = new ArrayList<>();
-        mAuth=FirebaseAuth.getInstance();
         traerDatos();
 
         botones.add(btnPregunta1);
