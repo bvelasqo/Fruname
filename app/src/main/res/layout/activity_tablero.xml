@@ -135,7 +135,6 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
             <LinearLayout
                 android:id="@+id/layoutBotones"
                 android:layout_width="match_parent"
@@ -143,6 +142,8 @@
                 android:layout_marginTop="15dp"
                 android:orientation="vertical" />
         </ScrollView>
+
+
 
     </LinearLayout>
 

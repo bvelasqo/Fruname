@@ -89,11 +89,7 @@ public class tablero extends AppCompatActivity {
                             public void onClick(View v) {
                                 Random random = new Random();
                                 int juego =random.nextInt(3);
-                                Intent intent=new Intent(tablero.this, descubreLaImagen.class);
-                                intent.putExtra("boton", finalI +1);
-                                startActivity(intent);
-                                finish();
-                                /*switch (juego){
+                                switch (juego){
                                     case 0:
                                         Intent intent=new Intent(tablero.this, descubreLaImagen.class);
                                         intent.putExtra("boton", finalI +1);
@@ -112,7 +108,7 @@ public class tablero extends AppCompatActivity {
                                         startActivity(intent3);
                                         finish();
                                         break;
-                                }*/
+                                }
 
 
                             }
@@ -122,6 +118,10 @@ public class tablero extends AppCompatActivity {
                 else {
                     Toast.makeText(getApplicationContext(),"no existe",Toast.LENGTH_LONG).show();
                 }
+                Button button = new Button(getApplicationContext());
+                button.setLayoutParams(layoutParams);
+                button.setBackground(getResources().getDrawable(R.drawable.botoninvisible));
+                layoutBotones.addView(button);
             }
 
             @Override
