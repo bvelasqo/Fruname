@@ -34,6 +34,10 @@ public class tablero extends AppCompatActivity {
     Button btnCerrarSesion;
     LinearLayout layoutBotones;
     LinearLayout.LayoutParams layoutParams;
+    private int scoreactual;
+    private int xpActual;
+    private int nivelActual;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +47,7 @@ public class tablero extends AppCompatActivity {
         mAuth=FirebaseAuth.getInstance();
         uid=mAuth.getCurrentUser().getUid();
         actualizarDatos();
+        traerDatos();
     }
 
     public void cerrarSesion(View view){
@@ -89,6 +94,7 @@ public class tablero extends AppCompatActivity {
                             public void onClick(View v) {
                                 Random random = new Random();
                                 int juego =random.nextInt(3);
+
                                 switch (juego){
                                     case 0:
                                         Intent intent=new Intent(tablero.this, descubreLaImagen.class);
@@ -98,6 +104,9 @@ public class tablero extends AppCompatActivity {
                                         break;
                                     case 1:
                                         Intent intent2=new Intent(tablero.this, ruletaPreguntados.class);
+                                        intent2.putExtra("scoreA",scoreactual);
+                                        intent2.putExtra("xpA",xpActual);
+                                        intent2.putExtra("nivelA",nivelActual);
                                         intent2.putExtra("boton", finalI +1);
                                         startActivity(intent2);
                                         finish();
@@ -130,5 +139,20 @@ public class tablero extends AppCompatActivity {
             }
         });
 
+    }
+    private void traerDatos() {
+        mDataBase.child("Jugadores").child(uid).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                scoreactual= Integer.parseInt(dataSnapshot.child("score").getValue().toString());
+                xpActual=Integer.parseInt(dataSnapshot.child("xp").getValue().toString());
+                nivelActual=Integer.parseInt(dataSnapshot.child("nivel").getValue().toString());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 }

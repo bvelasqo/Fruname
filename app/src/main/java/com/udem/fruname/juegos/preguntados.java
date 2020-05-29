@@ -36,11 +36,11 @@ public class preguntados extends AppCompatActivity {
 	ArrayList<Pregunta> listaPreguntas;
 	ArrayList<Button> opciones;
 	DatabaseReference mDataBase;
+	int contadorBuenas;
 
 	Pregunta preguntaActual;
-	private static final int XPAB=180;
+    int contador, numBoton,nivelActual,xpActual,scoreactual,puntos;
 
-	int contador, numBoton,nivelActual,xpActual,scoreactual,puntos=0;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -53,32 +53,20 @@ public class preguntados extends AppCompatActivity {
 		uid=mAuth.getCurrentUser().getUid();
 		operacionesDB = new operacionesDB(getApplicationContext());
 		numBoton=getIntent().getIntExtra("boton",0);
+        contadorBuenas=getIntent().getIntExtra("contB",0);
 		categoria = getIntent().getStringExtra("categoria");
 		puntos = getIntent().getIntExtra("puntos",0);
 		contador = getIntent().getIntExtra("contar",0);
+        scoreactual=getIntent().getIntExtra("scoreA",0);
+        xpActual=getIntent().getIntExtra("xpA",0);
+        nivelActual=getIntent().getIntExtra("nivelA",0);
 		listaPreguntas = operacionesDB.getPreguntaPR(categoria);
-		actualizarPregunta();
-		traerDatos();
+        tvscore.setText(puntos+"");
+        actualizarPregunta();
 		addBotones();
 	}
 
-	private void traerDatos() {
-		mDataBase.child("Jugadores").child(uid).addValueEventListener(new ValueEventListener() {
-			@Override
-			public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-				scoreactual= Integer.parseInt(dataSnapshot.child("score").getValue().toString());
-				xpActual=Integer.parseInt(dataSnapshot.child("xp").getValue().toString());
-				nivelActual=Integer.parseInt(dataSnapshot.child("nivel").getValue().toString());
-				nombre = dataSnapshot.child("nombre").getValue().toString();
-				tvnombre.setText(nombre);
-			}
 
-			@Override
-			public void onCancelled(@NonNull DatabaseError databaseError) {
-
-			}
-		});
-	}
 
 	private void conectar() {
 		opcion1 = findViewById(R.id.btnOpcion1);
@@ -91,65 +79,63 @@ public class preguntados extends AppCompatActivity {
 
 	private void actualizarPregunta() {
 		if (contador < 5) {
-			Random random = new Random();
-			int pregunta = random.nextInt(listaPreguntas.size() - contador);
-			preguntaActual = listaPreguntas.get(pregunta);
-			tvPreguntas.setText(preguntaActual.getPregunta());
-			correcta = listaPreguntas.get(pregunta).getCorrecta();
-			opcion1.setText(listaPreguntas.get(pregunta).getOpcion1());
-			opcion2.setText(listaPreguntas.get(pregunta).getOpcion2());
-			opcion3.setText(listaPreguntas.get(pregunta).getOpcion3());
-		} else FinJuego();
+            Random random = new Random();
+            int pregunta = random.nextInt(listaPreguntas.size() - contador);
+            preguntaActual = listaPreguntas.get(pregunta);
+            tvPreguntas.setText(preguntaActual.getPregunta());
+            correcta = listaPreguntas.get(pregunta).getCorrecta();
+            opcion1.setText(listaPreguntas.get(pregunta).getOpcion1());
+            opcion2.setText(listaPreguntas.get(pregunta).getOpcion2());
+            opcion3.setText(listaPreguntas.get(pregunta).getOpcion3());
+        }
 	}
 
-	private void FinJuego() {
-		Map<String,Object> datos = new HashMap();
-		if(numBoton==nivelActual)
-			datos.put("nivel",nivelActual+1);
-		datos.put("xp",xpActual+XPAB);
-		datos.put("score",scoreactual+puntos);
-		mDataBase.child("Jugadores").child(uid).updateChildren(datos);
-		startActivity(new Intent(preguntados.this, tablero.class));
-		finish();
-	}
+
 
 	private void addBotones() {
 		opciones.add(opcion1);
 		opciones.add(opcion2);
 		opciones.add(opcion3);
 		for (final Button b : opciones) {
-A				@Override
-				public void onClick(View v) {
-					if (correcta.equals(b.getText().toString())) {
-						Toast.makeText(getApplicationContext(), "¡Bien Hecho!¿Vamos por otra?", Toast.LENGTH_LONG).show();
-						b.setBackground(getResources().getDrawable(R.drawable.botonacertado));
-						puntos+=200;
-					} else {
-						Toast.makeText(getApplicationContext(), "No te desanimes juega otra vez!!, la respuesta es: " + correcta, Toast.LENGTH_LONG).show();
-						b.setBackground(getResources().getDrawable(R.drawable.botonincorrecto));
-					}
-					enabledButton(false);
-					new CountDownTimer(2000,1000){
-						@Override
-						public void onTick(long millisUntilFinished) {
-						}
+		    b.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (correcta.equals(b.getText().toString())) {
+                        Toast.makeText(getApplicationContext(), "¡Bien Hecho!¿Vamos por otra?", Toast.LENGTH_LONG).show();
+                        b.setBackground(getResources().getDrawable(R.drawable.botonacertado));
+                        contadorBuenas++;
+                        puntos+=200;
+                    } else {
+                        Toast.makeText(getApplicationContext(), "No te desanimes juega otra vez!!, la respuesta es: " + correcta, Toast.LENGTH_LONG).show();
+                        b.setBackground(getResources().getDrawable(R.drawable.botonincorrecto));
+                    }
+                    enabledButton(false);
+                    new CountDownTimer(2000,1000){
+                        @Override
+                        public void onTick(long millisUntilFinished) {
+                        }
 
-						@Override
-						public void onFinish() {
-							enabledButton(true);
-							b.setBackground(getResources().getDrawable(R.drawable.botonesalternativo));
-							contador++;
-							listaPreguntas.remove(preguntaActual);
-							Intent i = new Intent(getApplicationContext(),ruletaPreguntados.class);
-							i.putExtra("puntos",puntos);
-							i.putExtra("contar",contador);
-							startActivity(i);
-							finish();
-							tvscore.setText(puntos+"");
-						}
-					}.start();
-				}
-			});
+                        @Override
+                        public void onFinish() {
+                            enabledButton(true);
+                            b.setBackground(getResources().getDrawable(R.drawable.botonesalternativo));
+                            contador++;
+                            listaPreguntas.remove(preguntaActual);
+                            Intent i = new Intent(getApplicationContext(),ruletaPreguntados.class);
+                            i.putExtra("puntos",puntos);
+                            i.putExtra("contar",contador);
+                            i.putExtra("scoreA",scoreactual);
+                            i.putExtra("xpA",xpActual);
+                            i.putExtra("nivelA",nivelActual);
+                            i.putExtra("boton",numBoton);
+                            i.putExtra("contB",contadorBuenas);
+                            startActivity(i);
+                            finish();
+                        }
+                    }.start();
+                }
+            });
+
 		}
 	}
 
