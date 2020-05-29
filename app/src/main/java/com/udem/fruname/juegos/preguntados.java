@@ -29,7 +29,7 @@ import java.util.Random;
 
 public class preguntados extends AppCompatActivity {
 	Button opcion1, opcion2, opcion3;
-	TextView tvPreguntas;
+	TextView tvPreguntas,tvscore,tvnombre;
 	String categoria, correcta,uid,nombre;
 	operacionesDB operacionesDB;
 	FirebaseAuth mAuth;
@@ -54,6 +54,8 @@ public class preguntados extends AppCompatActivity {
 		operacionesDB = new operacionesDB(getApplicationContext());
 		numBoton=getIntent().getIntExtra("boton",0);
 		categoria = getIntent().getStringExtra("categoria");
+		puntos = getIntent().getIntExtra("puntos",0);
+		contador = getIntent().getIntExtra("contar",0);
 		listaPreguntas = operacionesDB.getPreguntaPR(categoria);
 		actualizarPregunta();
 		traerDatos();
@@ -68,6 +70,7 @@ public class preguntados extends AppCompatActivity {
 				xpActual=Integer.parseInt(dataSnapshot.child("xp").getValue().toString());
 				nivelActual=Integer.parseInt(dataSnapshot.child("nivel").getValue().toString());
 				nombre = dataSnapshot.child("nombre").getValue().toString();
+				tvnombre.setText(nombre);
 			}
 
 			@Override
@@ -82,6 +85,8 @@ public class preguntados extends AppCompatActivity {
 		opcion2 = findViewById(R.id.btnOpcion2);
 		opcion3 = findViewById(R.id.btnOpcion3);
 		tvPreguntas = findViewById(R.id.tvPregunta);
+		tvscore = findViewById(R.id.tvscorePR);
+		tvnombre = findViewById(R.id.tvNombrePR);
 	}
 
 	private void actualizarPregunta() {
@@ -137,8 +142,11 @@ public class preguntados extends AppCompatActivity {
 							contador++;
 							listaPreguntas.remove(preguntaActual);
 							Intent i = new Intent(getApplicationContext(),ruletaPreguntados.class);
+							i.putExtra("puntos",puntos);
+							i.putExtra("contar",contador);
 							startActivity(i);
 							finish();
+							tvscore.setText(puntos+"");
 						}
 					}.start();
 				}

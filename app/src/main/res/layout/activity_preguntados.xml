@@ -9,6 +9,20 @@
     tools:context=".juegos.preguntados">
 
     <TextView
+        android:id="@+id/tvNombrePR"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="145sp"
+        android:text="TextView" />
+
+    <TextView
+        android:layout_marginLeft="145sp"
+        android:id="@+id/tvscorePR"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
+
+    <TextView
         android:id="@+id/tvPregunta"
         android:layout_width="match_parent"
         android:layout_height="70dp"
@@ -40,4 +54,5 @@
         android:background="@drawable/botonesalternativo"
         android:id="@+id/btnOpcion3"
         />
-    </LinearLayout>
+
+</LinearLayout>

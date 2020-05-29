@@ -21,6 +21,7 @@ Button btnGirar;
 ImageView ruleta;
 TextView tvAngulo;
 Random r;
+int puntos,contador;
 int degree = 0, degreeOld = 0;
 private static final float FACTOR = 45f;
     @Override
@@ -28,14 +29,17 @@ private static final float FACTOR = 45f;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ruleta_preguntados);
         conectar();
+        puntos = getIntent().getIntExtra("puntos",0);
+        contador = getIntent().getIntExtra("contar",0);
         r = new Random();
+
         btnGirar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 degreeOld = degree % 360;
                 degree = r.nextInt(3600)+720;
                 RotateAnimation rotar = new RotateAnimation(degreeOld,degree,
-                        RotateAnimation.RELATIVE_TO_SELF,0.5f,RotateAnimation.RELATIVE_TO_SELF,0.5f);
+                RotateAnimation.RELATIVE_TO_SELF,0.5f,RotateAnimation.RELATIVE_TO_SELF,0.5f);
                 rotar.setDuration(3600);
                 rotar.setFillAfter(true);
                 rotar.setInterpolator(new DecelerateInterpolator());
@@ -50,6 +54,8 @@ private static final float FACTOR = 45f;
                         Intent i = new Intent(getApplicationContext(),preguntados.class);
                         String n=NumeroActual(360 - (degree % 360));
                         i.putExtra("categoria",n);
+                        i.putExtra("puntos",puntos);
+                        i.putExtra("contar",contador);
                         startActivity(i);
                     }
                     @Override
