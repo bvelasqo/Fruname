@@ -85,6 +85,5 @@ private static final float FACTOR = 45f;
     private void conectar() {
         btnGirar = findViewById(R.id.button);
         ruleta = findViewById(R.id.imageView7);
-        tvAngulo = findViewById(R.id.textView2);
     }
 }
