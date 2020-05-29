@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-=======
 <ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
->>>>>>> 808e23803caf55b6602c34b99940aae369b1162e
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="wrap_content"
     android:layout_width="match_parent"
