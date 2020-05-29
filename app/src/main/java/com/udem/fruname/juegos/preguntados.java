@@ -32,6 +32,7 @@ public class preguntados extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_preguntados);
 		conectar();
+		opciones=new ArrayList<>();
 		operacionesDB = new operacionesDB(getApplicationContext());
 		categoria = getIntent().getStringExtra("categoria");
 		listaPreguntas = operacionesDB.getPreguntaPR(categoria);
@@ -51,6 +52,7 @@ public class preguntados extends AppCompatActivity {
 			Random random = new Random();
 			int pregunta = random.nextInt(listaPreguntas.size() - contador);
 			preguntaActual = listaPreguntas.get(pregunta);
+			tvPreguntas.setText(preguntaActual.getPregunta());
 			correcta = listaPreguntas.get(pregunta).getCorrecta();
 			opcion1.setText(listaPreguntas.get(pregunta).getOpcion1());
 			opcion2.setText(listaPreguntas.get(pregunta).getOpcion2());
@@ -72,13 +74,9 @@ public class preguntados extends AppCompatActivity {
 					if (correcta.equals(b.getText().toString())) {
 						Toast.makeText(getApplicationContext(), "¡Bien Hecho!¿Vamos por otra?", Toast.LENGTH_LONG).show();
 						b.setBackground(getResources().getDrawable(R.drawable.botonacertado));
-						Intent i = new Intent(getApplicationContext(),ruletaPreguntados.class);
-						startActivity(i);
 					} else {
 						Toast.makeText(getApplicationContext(), "No te desanimes juega otra vez!!, la respuesta es: " + correcta, Toast.LENGTH_LONG).show();
 						b.setBackground(getResources().getDrawable(R.drawable.botonincorrecto));
-						Intent i = new Intent(getApplicationContext(),ruletaPreguntados.class);
-						startActivity(i);
 					}
 					enabledButton(false);
 					new CountDownTimer(2000,1000){
@@ -94,6 +92,7 @@ public class preguntados extends AppCompatActivity {
 							listaPreguntas.remove(preguntaActual);
 							Intent i = new Intent(getApplicationContext(),ruletaPreguntados.class);
 							startActivity(i);
+							finish();
 						}
 					}.start();
 				}

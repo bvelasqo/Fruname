@@ -35,14 +35,13 @@ private static final float FACTOR = 45f;
                 degreeOld = degree % 360;
                 degree = r.nextInt(3600)+720;
                 RotateAnimation rotar = new RotateAnimation(degreeOld,degree,
-                        RotateAnimation.RELATIVE_TO_SELF,0.5f);
+                        RotateAnimation.RELATIVE_TO_SELF,0.5f,RotateAnimation.RELATIVE_TO_SELF,0.5f);
                 rotar.setDuration(3600);
                 rotar.setFillAfter(true);
                 rotar.setInterpolator(new DecelerateInterpolator());
                 rotar.setAnimationListener(new Animation.AnimationListener() {
                     @Override
                     public void onAnimationStart(Animation animation) {
-
                     }
 
                     @Override
