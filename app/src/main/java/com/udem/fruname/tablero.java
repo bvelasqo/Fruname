@@ -118,6 +118,10 @@ public class tablero extends AppCompatActivity {
                 else {
                     Toast.makeText(getApplicationContext(),"no existe",Toast.LENGTH_LONG).show();
                 }
+                Button button = new Button(getApplicationContext());
+                button.setLayoutParams(layoutParams);
+                button.setBackground(getResources().getDrawable(R.drawable.botoninvisible));
+                layoutBotones.addView(button);
             }
 
             @Override
