@@ -97,6 +97,7 @@ public class preguntados extends AppCompatActivity {
 		opciones.add(opcion2);
 		opciones.add(opcion3);
 		for (final Button b : opciones) {
+<<<<<<< HEAD
 		    b.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -136,6 +137,41 @@ public class preguntados extends AppCompatActivity {
                 }
             });
 
+=======
+			b.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					if (correcta.equals(b.getText().toString())) {
+						Toast.makeText(getApplicationContext(), "¡Bien Hecho!¿Vamos por otra?", Toast.LENGTH_LONG).show();
+						b.setBackground(getResources().getDrawable(R.drawable.botonacertado));
+						puntos+=200;
+					} else {
+						Toast.makeText(getApplicationContext(), "No te desanimes juega otra vez!!, la respuesta es: " + correcta, Toast.LENGTH_LONG).show();
+						b.setBackground(getResources().getDrawable(R.drawable.botonincorrecto));
+					}
+					enabledButton(false);
+					new CountDownTimer(2000,1000){
+						@Override
+						public void onTick(long millisUntilFinished) {
+						}
+
+						@Override
+						public void onFinish() {
+							enabledButton(true);
+							b.setBackground(getResources().getDrawable(R.drawable.botonesalternativo));
+							contador++;
+							listaPreguntas.remove(preguntaActual);
+							Intent i = new Intent(getApplicationContext(),ruletaPreguntados.class);
+							i.putExtra("puntos",puntos);
+							i.putExtra("contar",contador);
+							startActivity(i);
+							finish();
+							tvscore.setText(puntos+"");
+						}
+					}.start();
+				}
+			});
+>>>>>>> 89549a75832e5797a3fde679e5267c1eb62262cf
 		}
 	}
 
