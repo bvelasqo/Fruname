@@ -118,7 +118,8 @@ public class preguntados extends AppCompatActivity {
 		opciones.add(opcion2);
 		opciones.add(opcion3);
 		for (final Button b : opciones) {
-A				@Override
+			b.setOnClickListener(new View.OnClickListener() {
+				@Override
 				public void onClick(View v) {
 					if (correcta.equals(b.getText().toString())) {
 						Toast.makeText(getApplicationContext(), "¡Bien Hecho!¿Vamos por otra?", Toast.LENGTH_LONG).show();
