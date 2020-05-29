@@ -19,7 +19,6 @@ import java.util.Random;
 public class ruletaPreguntados extends AppCompatActivity {
 Button btnGirar;
 ImageView ruleta;
-TextView tvAngulo;
 Random r;
 int puntos,contador;
 int degree = 0, degreeOld = 0;
@@ -50,7 +49,6 @@ private static final float FACTOR = 45f;
 
                     @Override
                     public void onAnimationEnd(Animation animation) {
-                        tvAngulo.setText(NumeroActual(360 - (degree % 360)));
                         Intent i = new Intent(getApplicationContext(),preguntados.class);
                         String n=NumeroActual(360 - (degree % 360));
                         i.putExtra("categoria",n);
