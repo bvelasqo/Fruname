@@ -13,21 +13,12 @@
         android:background="@drawable/candyland"
         tools:context=".juegos.preguntados">
 
-<<<<<<< HEAD
     <TextView
         android:id="@+id/tvNombrePR"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="145sp"
         android:text="@string/score" />
-=======
-        <TextView
-            android:id="@+id/tvNombrePR"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="145sp"
-            android:text="TextView" />
->>>>>>> 89549a75832e5797a3fde679e5267c1eb62262cf
 
         <TextView
             android:layout_marginLeft="145sp"

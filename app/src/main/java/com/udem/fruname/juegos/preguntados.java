@@ -97,7 +97,6 @@ public class preguntados extends AppCompatActivity {
 		opciones.add(opcion2);
 		opciones.add(opcion3);
 		for (final Button b : opciones) {
-<<<<<<< HEAD
 		    b.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -137,7 +136,6 @@ public class preguntados extends AppCompatActivity {
                 }
             });
 
-=======
 			b.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -171,7 +169,6 @@ public class preguntados extends AppCompatActivity {
 					}.start();
 				}
 			});
->>>>>>> 89549a75832e5797a3fde679e5267c1eb62262cf
 		}
 	}
 
