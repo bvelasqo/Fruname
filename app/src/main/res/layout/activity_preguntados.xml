@@ -1,58 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="wrap_content"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@drawable/candyland"
-    tools:context=".juegos.preguntados">
-
-    <TextView
-        android:id="@+id/tvNombrePR"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="145sp"
-        android:text="TextView" />
-
-    <TextView
-        android:layout_marginLeft="145sp"
-        android:id="@+id/tvscorePR"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView" />
-
-    <TextView
-        android:id="@+id/tvPregunta"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_marginTop="80sp"
-        android:gravity="center"
-        android:layout_marginBottom="350sp"
-        android:background="@drawable/custom_shape"
-        android:text="Cual de las siguientes es una serie telescopica?"
-        android:textStyle="bold" />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@drawable/candyland"
+        tools:context=".juegos.preguntados">
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/btnOpcion1"
-        android:layout_marginBottom="10sp"
-        android:background="@drawable/botonesalternativo"
-        />
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10sp"
-        android:background="@drawable/botonesalternativo"
-        android:id="@+id/btnOpcion2"
-        />
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10sp"
-        android:background="@drawable/botonesalternativo"
-        android:id="@+id/btnOpcion3"
-        />
+        <TextView
+            android:id="@+id/tvNombrePR"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="145sp"
+            android:text="TextView" />
 
-</LinearLayout>
+        <TextView
+            android:layout_marginLeft="145sp"
+            android:id="@+id/tvscorePR"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/tvPregunta"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginTop="80sp"
+            android:gravity="center"
+            android:layout_marginBottom="350sp"
+            android:background="@drawable/custom_shape"
+            android:text="Cual de las siguientes es una serie telescopica?"
+            android:textStyle="bold" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnOpcion1"
+            android:layout_marginBottom="10sp"
+            android:background="@drawable/botonesalternativo"
+            />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10sp"
+            android:background="@drawable/botonesalternativo"
+            android:id="@+id/btnOpcion2"
+            />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10sp"
+            android:background="@drawable/botonesalternativo"
+            android:id="@+id/btnOpcion3"
+            />
+
+    </LinearLayout>
+</ScrollView>
