@@ -64,11 +64,13 @@ public class descubreLaImagen extends AppCompatActivity {
         operacionesDB=new operacionesDB(getApplicationContext());
         preguntas = operacionesDB.getPreguntaDI();
         botones = new ArrayList<>();
-        traerDatos();
         opciones=new ArrayList<>();
+        traerDatos();
+
         opciones.add(btnOpcion1);
         opciones.add(btnOpcion2);
         opciones.add(btnOpcion3);
+
         botones.add(btnPregunta1);
         botones.add(btnPregunta2);
         botones.add(btnPregunta3);
