@@ -24,7 +24,6 @@ public class preguntados extends AppCompatActivity {
 	operacionesDB operacionesDB;
 	ArrayList<Pregunta> listaPreguntas;
 	ArrayList<Button> opciones;
-	operacionesDB operaciones;
 	Pregunta preguntaActual;
 	int contador;
 
@@ -34,12 +33,10 @@ public class preguntados extends AppCompatActivity {
 		setContentView(R.layout.activity_preguntados);
 		conectar();
 		operacionesDB = new operacionesDB(getApplicationContext());
-		Bundle b = getIntent().getExtras();
-		if (b != null) {
-			categoria = b.getString("categoria");
-		}
-		listaPreguntas = operaciones.getPreguntaPR(categoria);
+		categoria = getIntent().getStringExtra("categoria");
+		listaPreguntas = operacionesDB.getPreguntaPR(categoria);
 		actualizarPregunta();
+		addBotones();
 	}
 
 	private void conectar() {

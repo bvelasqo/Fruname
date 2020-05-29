@@ -49,7 +49,9 @@ private static final float FACTOR = 45f;
                     public void onAnimationEnd(Animation animation) {
                         tvAngulo.setText(NumeroActual(360 - (degree % 360)));
                         Intent i = new Intent(getApplicationContext(),preguntados.class);
-                        i.putExtra("categoria",NumeroActual(360 - (degree % 360)));
+                        String n=NumeroActual(360 - (degree % 360));
+                        i.putExtra("categoria",n);
+                        startActivity(i);
                     }
                     @Override
                     public void onAnimationRepeat(Animation animation) {
@@ -65,19 +67,19 @@ private static final float FACTOR = 45f;
         String text = "";
 
         if(degree >= FACTOR && degree < FACTOR*3){
-            text = "Deporte";
+            text = "DEPORTE";
         }
         if(degree >= FACTOR*3 && degree < FACTOR*5){
-            text = "Cultura General";
+            text = "CULTURA";
         }
         if(degree >= FACTOR*5 && degree < FACTOR*7){
-            text = "Geografia";
+            text = "GEOGRAFIA";
         }
         if(degree >= FACTOR*7 && degree < FACTOR*9){
-            text = "Historia";
+            text = "HISTORIA";
         }
         if(degree >= FACTOR*3 && degree < 360 || degree >= 0 && degree < FACTOR*1)
-            text="Cultura General";
+            text="CULTURA";
         return text;
     }
 

@@ -89,10 +89,9 @@ public class tablero extends AppCompatActivity {
                             public void onClick(View v) {
                                 Random random = new Random();
                                 int juego =random.nextInt(3);
-                                Intent intent=new Intent(tablero.this, descubreLaImagen.class);
-                                intent.putExtra("boton", finalI +1);
-                                startActivity(intent);
-                                finish();
+                                Intent intent2=new Intent(tablero.this, ruletaPreguntados.class);
+                                intent2.putExtra("boton", finalI +1);
+                                startActivity(intent2);
                                 /*switch (juego){
                                     case 0:
                                         Intent intent=new Intent(tablero.this, descubreLaImagen.class);
