@@ -63,10 +63,12 @@ public class descubreLaImagen extends AppCompatActivity {
         uid=mAuth.getCurrentUser().getUid();
         operacionesDB=new operacionesDB(getApplicationContext());
         preguntas = operacionesDB.getPreguntaDI();
-        opciones = new ArrayList<>();
         botones = new ArrayList<>();
         traerDatos();
-
+        opciones=new ArrayList<>();
+        opciones.add(btnOpcion1);
+        opciones.add(btnOpcion2);
+        opciones.add(btnOpcion3);
         botones.add(btnPregunta1);
         botones.add(btnPregunta2);
         botones.add(btnPregunta3);
@@ -89,7 +91,7 @@ public class descubreLaImagen extends AppCompatActivity {
                     btnOpcion1.setEnabled(true);
                     btnOpcion2.setEnabled(true);
                     btnOpcion3.setEnabled(true);
-                    countDownTimer = new CountDownTimer(10000, 1000) {
+                    countDownTimer = new CountDownTimer(20000, 1000) {
                         @Override
                         public void onTick(long millisUntilFinished) {
                             lbTiempo.setText(String.format(Locale.getDefault(), "%d sec", millisUntilFinished / 1000L));
@@ -111,9 +113,7 @@ public class descubreLaImagen extends AppCompatActivity {
     }
 
     private void esCorrecta(){
-        opciones.add(btnOpcion1);
-        opciones.add(btnOpcion2);
-        opciones.add(btnOpcion3);
+
         for(final Button boton : opciones){
             boton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -157,13 +157,25 @@ public class descubreLaImagen extends AppCompatActivity {
                     btnOpcion1.setEnabled(false);
                     btnOpcion2.setEnabled(false);
                     btnOpcion3.setEnabled(false);
+                    if(contestadas>=12){
+                        Toast.makeText(getApplicationContext(),"FIN DEL JUEGO",Toast.LENGTH_LONG).show();
+                        if(cantidadCorrectas == 12){
+                            Toast.makeText(getApplicationContext(),"FELICITACIONES, HAS GANADO EL JUEGO",Toast.LENGTH_LONG).show();
+                            TerminarJuego();
+                        } else {
+                            Toast.makeText(getApplicationContext(),"SUERTE LA PRÓXIMA",Toast.LENGTH_LONG).show();
+                            Intent intent = new Intent(getApplicationContext(),tablero.class);
+                            startActivity(intent);
+                            finish();
+                        }
+                    }
                 }
             });
         }
     }
 
     private void mostrarPreguntas(){
-        if(contestadas<12){
+
             aleatorio = random.nextInt(40-contestadas);
             preguntaActual = preguntas.get(aleatorio);
             correcta = preguntas.get(aleatorio).getCorrecta();
@@ -171,18 +183,7 @@ public class descubreLaImagen extends AppCompatActivity {
             btnOpcion1.setText(preguntas.get(aleatorio).getOpcion1());
             btnOpcion2.setText(preguntas.get(aleatorio).getOpcion2());
             btnOpcion3.setText(preguntas.get(aleatorio).getOpcion3());
-        } else {
-            Toast.makeText(getApplicationContext(),"FIN DEL JUEGO",Toast.LENGTH_LONG).show();
-            if(cantidadCorrectas == 12){
-                Toast.makeText(getApplicationContext(),"FELICITACIONES, HAS GANADO EL JUEGO",Toast.LENGTH_LONG).show();
-                TerminarJuego();
-            } else {
-                Toast.makeText(getApplicationContext(),"VUELVE A INTENTARLO HASTA DESCUBRIR TODA LA IMAGEN",Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(getApplicationContext(),tablero.class);
-                startActivity(intent);
-                finish();
-            }
-        }
+
     }
 
     private void traerDatos(){
@@ -193,6 +194,7 @@ public class descubreLaImagen extends AppCompatActivity {
                 xpActual=Integer.parseInt(dataSnapshot.child("xp").getValue().toString());
                 nivelActual=Integer.parseInt(dataSnapshot.child("nivel").getValue().toString());
                 nombre = dataSnapshot.child("nombre").getValue().toString();
+                lbNombreJugador.setText(nombre);
             }
 
             @Override
@@ -200,7 +202,7 @@ public class descubreLaImagen extends AppCompatActivity {
 
             }
         });
-        lbNombreJugador.setText(nombre);
+
     }
 
     private void TerminarJuego() {
